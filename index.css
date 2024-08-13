@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  overflow: hidden; /* Evita el desbordamiento si el mapa se expande */
+}
+
+#map {
+  height: 100vh;
+  width: 80%; /* Ancho inicial */
+  transition: width 0.3s ease;
+  position: relative; /* Necesario para que el botón se superponga */
+}
+
+#sidebar {
+  width: 20%;
+  height: 100vh;
+  position: relative;
+  transition: width 0.3s ease;
+  background-color: rgba(240, 240, 240, 0.9); /* Fondo semitransparente */
+  overflow: hidden; /* Oculta el contenido cuando se retrae */
+}
+
+#sidebar.retracted {
+  width: 40px; /* Solo muestra el ancho del botón */
+  transition: width 0.3s ease;
+}
+
+#pinList {
+  height: 100%; /* Asegura que ocupe toda la altura del sidebar */
+  background-color: rgba(240, 240, 240, 0.9); /* Fondo semitransparente */
+  overflow-y: auto;
+  padding: 10px;
+  box-sizing: border-box;
+  border-right: 1px solid #ccc;
+  transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+#sidebar.retracted #pinList {
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+  height: 0; /* Ocultar la altura también */
+  padding: 0;
+}
+
+#toggleListBtn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 1000; /* Asegúrate de que el botón esté encima del mapa */
+  background-color: #ccc;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 3px;
+  transition: transform 0.3s ease;
+}
+
+#sidebar.retracted #toggleListBtn {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+#sidebar.retracted + #map {
+  width: calc(100% - 40px); /* Ajusta el ancho del mapa al espacio restante */
+  position: absolute; /* Asegúrate de que el mapa se expanda correctamente */
+  left: 0; /* Alinea el mapa a la izquierda */
+}
