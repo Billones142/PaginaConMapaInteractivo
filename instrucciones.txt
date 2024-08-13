@@ -1,0 +1,1 @@
+Hacer pagina usando OpenStreetMap donde se puedan poner pines y hacer que queden guardados cada vez que habras la pagina mediante el localstorage
